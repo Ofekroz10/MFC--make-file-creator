@@ -1,9 +1,11 @@
 package mainPack;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.StringReader;
@@ -42,7 +44,7 @@ public class Creator implements Icreator
 	}
 
 	@Override
-	public void creatAndSave() {
+	public void creatAndSave(String s) {
 		try {
 			initCfiles();
 			for (Cfile cfile : cFiles) {
@@ -52,12 +54,27 @@ public class Creator implements Icreator
 			make.makeAll();
 			System.out.println("----");
 			System.out.println(make.getContent());
-			
+			saveToFile(s);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	     
+	}
+	private void saveToFile(String s) throws IOException {
+		
+		try (FileWriter writer = new FileWriter(s+"//"+"makefile");
+				 BufferedWriter bw = new BufferedWriter(writer)) {
+
+				bw.write(make.getContent());
+				bw.close();
+
+		}
+				
+		catch(FileNotFoundException  e)
+		{
+			throw new  FileNotFoundException ("the file is not writble");
+		}
 	}
 	@Override 
 	public String toString()

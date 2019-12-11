@@ -40,7 +40,7 @@ public class Program
 		mf1.makeAll();
 		System.out.println(mf1.getContent()); // change that the liabery always depend on main.*/
 		Creator c = new Creator("C:\\Users\\ofekroz\\Desktop\\DvirOfek-master");
-		c.creatAndSave();
+		//c.creatAndSave();
 		
 		
 		

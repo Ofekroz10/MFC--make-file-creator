@@ -45,7 +45,7 @@ public class MainWin implements Igui
 
 	private void CreateWin() 
 	{
-		mainFrame.setSize(1000,850);
+		mainFrame.setSize(1000,600);
 		upPanel = new JPanel();
 		JLabel folderL = new JLabel("Choose the path of the folder");
 		dirText.setText("Empty directory");
@@ -74,7 +74,7 @@ public class MainWin implements Igui
 			public void actionPerformed(ActionEvent e) {
 				
 				Creator c = new Creator(path);
-				c.creatAndSave();
+				c.creatAndSave(path);
 			}
 		});
 		
