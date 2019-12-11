@@ -40,4 +40,10 @@ public class Hfile implements Ifile {
 		return new String(this.name.substring(0,this.name.length()-2));
 	}
 
+	public Hfile copy()
+	{
+		Hfile newH= new Hfile(name);
+		return newH;
+	}
+
 }

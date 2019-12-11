@@ -2,7 +2,7 @@ package mainPack;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-
+//comments
 public class Cfile implements  Ifile, Imainfile
 {
 	protected String name;
@@ -97,6 +97,16 @@ public class Cfile implements  Ifile, Imainfile
 	@Override
 	public double getCom() {
 		return 1;
+	}
+
+	public Cfile copy()
+	{
+		Cfile newC = new Cfile(this.name);
+		for (Ifile ifile : dependence) 
+		{
+			newC.addDependence(ifile);
+		}
+		return newC;
 	}
 	
 	

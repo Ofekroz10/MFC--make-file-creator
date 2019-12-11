@@ -14,23 +14,29 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.LinkedList;
 
+import javax.swing.ListModel;
+
 
 public class Creator implements Icreator
 {
 	private String fileName;
-	public LinkedList<Cfile> cFiles;
+	private LinkedList<Cfile> cFiles;
 	private Makefile make;
+	private File[] allFiles;
 
 	
 	public Creator(String fileName)
 	{
 		this.fileName= fileName;
 		this.cFiles = new LinkedList<Cfile>();
-		
+			
 		make = new Makefile();
 		
 	}
-
+	public File[] getAllFiles()
+	{
+		return allFiles.clone();
+	}
 	public String getFileName() {
 		return fileName;
 	}
@@ -53,8 +59,13 @@ public class Creator implements Icreator
 		}
 	     
 	}
+	@Override 
+	public String toString()
+	{
+		return cFiles.toString();
+	}
 	private void makeLibs() {
-	
+		
 		try {
 			String path = this.fileName +"\\.make";
 			String content = this.readFile(path,Charset.defaultCharset());
@@ -116,8 +127,9 @@ public class Creator implements Icreator
 	 		
 	 			catch(Exception e)
 	 			{
-	 				System.out.println("Wrong .make file!!");
-	 				return;
+	 				throw e;
+	 				//System.out.println("Wrong .make file!!");
+	 				//return;
 	 			}
 	 			
 	 		}
@@ -129,6 +141,7 @@ public class Creator implements Icreator
 		
 	}
 
+
 	private Cfile getCfile(String s) {
 		for (Cfile cfile : cFiles) {
 			if(cfile.getName().equals(s))
@@ -137,7 +150,7 @@ public class Creator implements Icreator
 		return null;
 	}
 
-	private void initCfiles() throws IOException
+	public void initCfiles() throws IOException
 	{
 		try
         {
@@ -148,7 +161,18 @@ public class Creator implements Icreator
     	 	    public boolean accept(File dir, String name) {
     	 	        return name.endsWith(".c");
     	 	    }
+    	 	    
     	 	});
+    		File[] listOfFiles1 = folder.listFiles(new FilenameFilter() {
+    	 	    @Override
+    	 	    public boolean accept(File dir, String name) {
+    	 	        return name.endsWith(".c") || name.endsWith(".h") || name.equals(".make");
+    	 	    }
+
+    	 	   
+    	 	});
+    		this.allFiles = listOfFiles1;
+    		
     	 	for (File file : listOfFiles) {
     	 		Path p = Paths.get(this.fileName,file.getName());
     	 		System.out.println(file.getName());
@@ -218,6 +242,19 @@ public class Creator implements Icreator
 			  byte[] encoded = Files.readAllBytes(Paths.get(path));
 			  return new String(encoded, encoding);
 			}
+	public int getCfilesLen() {
+		return this.cFiles.size();
+	}
+	public String[] getListF() {
+		String[] filesAsStr = new String[allFiles.length];
+		int  i=0;
+		for (File f : allFiles) {
+			filesAsStr[i] = f.getName();
+			i++;
+		}
+		return filesAsStr; 
+	}
+	
 	
 	
 	

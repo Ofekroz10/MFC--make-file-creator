@@ -9,4 +9,5 @@ public interface Ifile
 	public String getName();
 	public void removeDependence(String name);
 	public String getOnlyName();
+
 }

@@ -3,7 +3,8 @@ package mainPack;
 public class Program
 {
 	public static void main(String[] args)
-	{/*
+	{
+	/*
 		Cfile c = new Cfile("main.c");
 		Cfile c2 = new Cfile("math.c");
 		Cfile c4= new Cfile("go.c");
@@ -23,7 +24,7 @@ public class Program
 		mf.addFile(libS);
 		mf.makeAll();
 		System.out.prdoubleln(mf.getContent());*/
-		Cfile main = new Cfile("main.c");
+		/*Cfile main = new Cfile("main.c");
 		Cfile myBank = new Cfile("myBank.c");
 		Cfile c1 = new Cfile("ofek.c");
 		c1.createHeader();
@@ -37,7 +38,7 @@ public class Program
 		mf1.addFile(s);
 		mf1.addFile(c1);
 		mf1.makeAll();
-		System.out.println(mf1.getContent()); // change that the liabery always depend on main.
+		System.out.println(mf1.getContent()); // change that the liabery always depend on main.*/
 		Creator c = new Creator("C:\\Users\\ofekroz\\Desktop\\DvirOfek-master");
 		c.creatAndSave();
 		

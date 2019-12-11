@@ -44,12 +44,15 @@ public class Makefile implements Imake
 		{
 			libExist= true;
 			Iterator<Imainfile> it = ((Lib)file).iterator();
+			
 			while(it.hasNext())
 			{
+				Iterator<String> mainssIt = mainss.iterator();
 				Imainfile current = it.next();
-				for (String mainF : mainss) {
-					if(mainF.equals(current.getNameToMakeFile()))
-						mainss.remove(mainF);
+				while(mainssIt.hasNext()) {
+					String s = mainssIt.next();
+					if(s.equals(current.getNameToMakeFile()))
+						mainssIt.remove();
 				}
 			}
 		}
